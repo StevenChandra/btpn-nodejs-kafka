@@ -15,7 +15,52 @@ module.exports = {
       }
     });
   },
-
+  getByAccountNumber: function (req, res, next) {
+    vehicleModel.findOne({ accountNumber: req.body.accountNumber }, function (
+      err,
+      info
+    ) {
+      if (err) {
+        next(err);
+      } else {
+        if (info) {
+          res.json({
+            status: "success",
+            message: "Details found!!!",
+            data: { vehicles: info },
+          });
+        } else {
+          res.json({
+            status: "success",
+            message: "No Data",
+          });
+        }
+      }
+    });
+  },
+  getByIdentityNumber: function (req, res, next) {
+    vehicleModel.findOne({ accountNumber: req.body.identityNumber }, function (
+      err,
+      info
+    ) {
+      if (err) {
+        next(err);
+      } else {
+        if (info) {
+          res.json({
+            status: "success",
+            message: "Details found!!!",
+            data: { vehicles: info },
+          });
+        } else {
+          res.json({
+            status: "success",
+            message: "No Data",
+          });
+        }
+      }
+    });
+  },
   getAll: function (req, res, next) {
     let vehiclesList = [];
 

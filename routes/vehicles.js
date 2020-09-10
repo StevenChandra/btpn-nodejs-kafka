@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const movieController = require("../app/api/controllers/vehicles");
+const vehicleController = require("../app/api/controllers/vehicles");
 
-router.get("/", movieController.getAll);
-router.post("/", movieController.create);
-router.get("/:vehicleId", movieController.getById);
-router.put("/:vehicleId", movieController.updateById);
-router.delete("/:vehicleId", movieController.deleteById);
+router.get("/", vehicleController.getAll);
+router.post("/", vehicleController.create);
+router.post("/getByAccountNumber", vehicleController.getByAccountNumber);
+router.post("/getByIdentityNumber", vehicleController.getByIdentityNumber);
+router.get("/:vehicleId", vehicleController.getById);
+router.put("/:vehicleId", vehicleController.updateById);
+router.delete("/:vehicleId", vehicleController.deleteById);
 
 module.exports = router;
