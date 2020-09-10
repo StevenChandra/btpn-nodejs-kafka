@@ -28,7 +28,7 @@ app.use("/users", users);
 
 // private route
 app.use("/vehicles", validateUser, vehicles);
-app.use("/kafka", validateUser, kafka);
+app.use("/kafka", kafka);
 
 app.get("/favicon.ico", function (req, res) {
   res.sendStatus(204);
