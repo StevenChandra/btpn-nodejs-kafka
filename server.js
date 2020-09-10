@@ -2,6 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const vehicles = require("./routes/vehicles");
 const users = require("./routes/users");
+const kafka = require("./routes/kafka");
 const bodyParser = require("body-parser");
 const mongoose = require("./config/database"); //database configuration
 var jwt = require("jsonwebtoken");
@@ -27,6 +28,7 @@ app.use("/users", users);
 
 // private route
 app.use("/vehicles", validateUser, vehicles);
+app.use("/kafka", validateUser, kafka);
 
 app.get("/favicon.ico", function (req, res) {
   res.sendStatus(204);
