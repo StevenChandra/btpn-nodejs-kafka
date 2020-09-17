@@ -89,7 +89,7 @@ module.exports = {
   updateById: function (req, res, next) {
     vehicleModel.findByIdAndUpdate(
       req.params.vehicleId,
-      { name: req.body.name },
+      { $set: req.body },
       function (err, info) {
         if (err) next(err);
         else {
