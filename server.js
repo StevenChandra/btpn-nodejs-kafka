@@ -1,13 +1,14 @@
 const express = require("express");
 const logger = require("morgan");
 const vehicles = require("./routes/vehicles");
+const finances = require("./routes/finances");
 const users = require("./routes/users");
 const bodyParser = require("body-parser");
 const mongoose = require("./config/database"); //database configuration
 var jwt = require("jsonwebtoken");
 const app = express();
 
-app.set("secretKey", "stevenchandra"); // jwt secret token
+app.set("secretKey", "btpn_loan_key"); // jwt secret token
 
 // connection to mongodb
 mongoose.connection.on(
@@ -27,6 +28,7 @@ app.use("/users", users);
 
 // private route
 app.use("/vehicles", validateUser, vehicles);
+app.use("/finances", validateUser, finances);
 
 app.get("/favicon.ico", function (req, res) {
   res.sendStatus(204);
