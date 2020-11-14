@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const vehicleController = require("../app/api/controllers/vehicles");
+const financeController = require("../app/api/controllers/finances");
 
 router.get("/", vehicleController.getAll);
 router.post("/", vehicleController.create);

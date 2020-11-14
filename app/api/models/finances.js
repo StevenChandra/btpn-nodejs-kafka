@@ -9,18 +9,19 @@ const VehicleUserSchema = new Schema({
     trim: true,
     required: true,
   },
-  accountNumber: {
+  loanNumber: {
     type: Number,
     trim: true,
     required: true,
   },
-  emailAddress: {
-    type: String,
-    trim: true,
-    required: true,
-  },
+
   identityNumber: {
     type: Number,
+    trim: true,
+    required: true,
+  },
+  loanCreditor: {
+    type: String,
     trim: true,
     required: true,
   },
