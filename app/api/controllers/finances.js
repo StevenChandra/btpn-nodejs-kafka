@@ -2,7 +2,6 @@ const financesModel = require("../models/finances");
 
 module.exports = {
   getById: function (req, res, next) {
-    console.log(req.body);
     financesModel.findById(req.params.financesId, function (err, info) {
       if (err) {
         next(err);
@@ -15,7 +14,7 @@ module.exports = {
       }
     });
   },
-  getByAccountNumber: function (req, res, next) {
+  getByLoanNumber: function (req, res, next) {
     financesModel.findOne({ loanNumber: req.body.loanNumber }, function (
       err,
       info
@@ -38,8 +37,8 @@ module.exports = {
       }
     });
   },
-  getByIdentityNumber: function (req, res, next) {
-    vehicleModel.findOne({ accountNumber: req.body.identityNumber }, function (
+  getByLoanCreditor: function (req, res, next) {
+    financesModel.findOne({ loanCreditor: req.body.loanCreditor }, function (
       err,
       info
     ) {
@@ -50,7 +49,7 @@ module.exports = {
           res.json({
             status: "success",
             message: "Details found!!!",
-            data: { vehicles: info },
+            data: { finances: info },
           });
         } else {
           res.json({
@@ -62,33 +61,33 @@ module.exports = {
     });
   },
   getAll: function (req, res, next) {
-    let vehiclesList = [];
+    let dataList = [];
 
-    vehicleModel.find({}, function (err, vehicles) {
+    financesModel.find({}, function (err, finances) {
       if (err) {
         next(err);
       } else {
-        for (let vehicle of vehicles) {
-          vehiclesList.push({
-            id: vehicle._id,
-            userName: vehicle.userName,
-            accountNumber: vehicle.accountNumber,
-            emailAddress: vehicle.emailAddress,
-            identityNumber: vehicle.identityNumber,
+        for (let finance of finances) {
+          dataList.push({
+            id: finance._id,
+            userName: finance.userName,
+            accountNumber: finance.accountNumber,
+            loanCreditor: finance.loanCreditor,
+            identityNumber: finance.identityNumber,
           });
         }
         res.json({
           status: "success",
           message: "data found!!!",
-          data: { vehicles: vehiclesList },
+          data: { finances: dataList },
         });
       }
     });
   },
 
   updateById: function (req, res, next) {
-    vehicleModel.findByIdAndUpdate(
-      req.params.vehicleId,
+    financesModel.findByIdAndUpdate(
+      req.params.financesId,
       { name: req.body.name },
       function (err, info) {
         if (err) next(err);
@@ -104,7 +103,10 @@ module.exports = {
   },
 
   deleteById: function (req, res, next) {
-    vehicleModel.findByIdAndRemove(req.params.vehicleId, function (err, info) {
+    financesModel.findByIdAndRemove(req.params.financesId, function (
+      err,
+      info
+    ) {
       if (err) next(err);
       else {
         res.json({
@@ -117,12 +119,12 @@ module.exports = {
   },
 
   create: function (req, res, next) {
-    vehicleModel.create(
+    financesModel.create(
       {
         userName: req.body.userName,
-        accountNumber: req.body.accountNumber,
-        emailAddress: req.body.emailAddress,
         identityNumber: req.body.identityNumber,
+        loanNumber: req.body.loanNumber,
+        loanCreditor: req.body.loanCreditor,
       },
       function (err, result) {
         if (err) next(err);
